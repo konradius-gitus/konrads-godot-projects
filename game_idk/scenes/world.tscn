@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bbpe7h3cor8yw" path="res://scenes/pause.tscn" id="5_qfnet"]
 [ext_resource type="PackedScene" uid="uid://ie7gbjqa4fy6" path="res://scenes/death_screen.tscn" id="7_i7141"]
 [ext_resource type="Script" uid="uid://cht6tsxy2lx3d" path="res://scenes/progress_bar.gd" id="8_4mrxx"]
+[ext_resource type="Script" uid="uid://b5yqw310mdtwk" path="res://scripts/thrust_gauge.gd" id="9_7r4gi"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qfnet"]
 friction = 0.7
@@ -25,6 +26,15 @@ colors = PackedColorArray(0.19622773, 0.124472, 0.0848177, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_4wyf3"]
 gradient = SubResource("Gradient_rwgxs")
+
+[sub_resource type="Gradient" id="Gradient_7r4gi"]
+offsets = PackedFloat32Array(0.28125, 0.97836536)
+colors = PackedColorArray(0, 0, 0, 0, 0.41960785, 0.043137256, 0.0627451, 0.8117647)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w7kh3"]
+gradient = SubResource("Gradient_7r4gi")
+fill = 1
+fill_from = Vector2(0.5017361, 0.5017361)
 
 [node name="World" type="Node2D" unique_id=1723786056]
 light_mask = 2
@@ -44,6 +54,9 @@ texture = ExtResource("3_4wyf3")
 position = Vector2(2588, -2361)
 gravity_scale = 0.35
 inertia = 0.0
+speed_limit = 521
+thrust_constant = 1000
+fuel_tank_max = 2000
 
 [node name="terrain" type="StaticBody2D" parent="." unique_id=297748094]
 physics_material_override = SubResource("PhysicsMaterial_qfnet")
@@ -71,6 +84,14 @@ position_smoothing_enabled = true
 script = ExtResource("5_71j4m")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1328869375]
+
+[node name="speed_warning" type="TextureRect" parent="CanvasLayer" unique_id=864513662]
+visible = false
+offset_left = -2.0
+offset_top = 3.0
+offset_right = 1921.0
+offset_bottom = 1074.0
+texture = SubResource("GradientTexture2D_w7kh3")
 
 [node name="Death_Screen" parent="CanvasLayer" unique_id=1138505558 instance=ExtResource("7_i7141")]
 visible = false
@@ -102,4 +123,22 @@ fill_mode = 3
 show_percentage = false
 script = ExtResource("8_4mrxx")
 
+[node name="thrust_gauge" type="Label" parent="CanvasLayer" unique_id=373695537]
+offset_left = 1675.0
+offset_top = 944.0
+offset_right = 1768.0
+offset_bottom = 994.0
+theme_override_font_sizes/font_size = 36
+text = "100%"
+script = ExtResource("9_7r4gi")
+
+[node name="Thrust_label" type="Label" parent="CanvasLayer" unique_id=255129774]
+offset_left = 1544.0
+offset_top = 943.0
+offset_right = 1667.0
+offset_bottom = 993.0
+theme_override_font_sizes/font_size = 36
+text = "Thrust:"
+
 [connection signal="tank_changed" from="Player" to="CanvasLayer/ProgressBar" method="_on_player_tank_changed"]
+[connection signal="thrust_changed" from="Player" to="CanvasLayer/thrust_gauge" method="_on_player_thrust_changed"]

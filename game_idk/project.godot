@@ -19,11 +19,6 @@ run/main_scene="uid://cdanrmb3njyum"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
-[autoload]
-
-Player="res://scripts/player.gd"
-ParticleController="res://scripts/particle_controller.gd"
-
 [display]
 
 window/size/viewport_width=1920
