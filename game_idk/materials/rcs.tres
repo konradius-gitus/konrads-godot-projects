@@ -1,0 +1,33 @@
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://ckptdalejtl4d"]
+
+[sub_resource type="Gradient" id="Gradient_3v2ag"]
+offsets = PackedFloat32Array(0.08083832, 0.98203593)
+colors = PackedColorArray(1, 1, 1, 1, 0.5882353, 0.5882353, 0.5882353, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3v2ag"]
+gradient = SubResource("Gradient_3v2ag")
+
+[sub_resource type="Curve" id="Curve_c6gdr"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.715625, 1.7396746), 1.2698809, 1.2698809, 0, 0, Vector2(1, 2), 4.1292973, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_q6425"]
+curve = SubResource("Curve_c6gdr")
+
+[resource]
+lifetime_randomness = 0.02
+particle_flag_align_y = true
+particle_flag_disable_z = true
+angle_min = -209.79999
+angle_max = 146.00002
+spread = 11.31
+initial_velocity_min = 190.84
+initial_velocity_max = 190.84
+angular_velocity_min = -48.270016
+angular_velocity_max = 20.109983
+gravity = Vector3(0, 98, 0)
+scale_curve = SubResource("CurveTexture_q6425")
+color_ramp = SubResource("GradientTexture1D_3v2ag")
+anim_speed_min = 0.35
+anim_speed_max = 1.03
