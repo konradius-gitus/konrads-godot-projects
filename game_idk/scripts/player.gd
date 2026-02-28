@@ -2,7 +2,7 @@ extends RigidBody2D
 
 @export var speed = 400.0
 @export var speed_limit = 500
-@export var thrust_constant = 600
+@export var thrust_constant = 1000
 var thrust = 50
 
 @export var fuel_tank_max = 1000

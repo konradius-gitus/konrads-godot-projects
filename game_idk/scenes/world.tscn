@@ -52,10 +52,9 @@ texture = ExtResource("3_4wyf3")
 
 [node name="Player" parent="." unique_id=1151405438 instance=ExtResource("1_kiio4")]
 position = Vector2(2588, -2361)
-gravity_scale = 0.35
+gravity_scale = 0.12
 inertia = 0.0
 speed_limit = 521
-thrust_constant = 1000
 fuel_tank_max = 2000
 
 [node name="terrain" type="StaticBody2D" parent="." unique_id=297748094]
@@ -105,10 +104,10 @@ visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 865.0
-offset_top = 835.0
-offset_right = -941.0
-offset_bottom = -145.0
+offset_left = 738.0
+offset_top = 469.0
+offset_right = -723.0
+offset_bottom = -373.0
 grow_horizontal = 2
 grow_vertical = 2
 
