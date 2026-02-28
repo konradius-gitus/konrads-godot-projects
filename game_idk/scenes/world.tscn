@@ -101,3 +101,5 @@ value = 3.83
 fill_mode = 3
 show_percentage = false
 script = ExtResource("8_4mrxx")
+
+[connection signal="tank_changed" from="Player" to="CanvasLayer/ProgressBar" method="_on_player_tank_changed"]

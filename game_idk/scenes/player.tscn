@@ -6,13 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://mk56k80xr5fc" path="res://sprites/thrust_particle.png" id="3_umv85"]
 [ext_resource type="Script" uid="uid://csflsjq2bit3f" path="res://scripts/thrust_particle.gd" id="4_24335"]
 [ext_resource type="Texture2D" uid="uid://cci738880qakw" path="res://sprites/RCV_particle.png" id="5_x222i"]
-[ext_resource type="Script" uid="uid://b5ibbvl0n4box" path="res://scripts/rcs1.gd" id="7_0rccx"]
+[ext_resource type="Script" uid="uid://b5ibbvl0n4box" path="res://scripts/rcs/rcs1.gd" id="7_0rccx"]
 [ext_resource type="Material" uid="uid://ckptdalejtl4d" path="res://materials/rcs.tres" id="7_jej6c"]
-[ext_resource type="Script" uid="uid://jqt6rg36glnm" path="res://scripts/rcs2.gd" id="7_sduud"]
-[ext_resource type="Script" uid="uid://cur5jxrm7pam3" path="res://scripts/rcs3.gd" id="8_yetpw"]
-[ext_resource type="Script" uid="uid://dmcieq7lbcoyh" path="res://scripts/rcs4.gd" id="10_6exp8"]
-[ext_resource type="Script" uid="uid://bkdtil23hwk4h" path="res://scripts/rcs5.gd" id="11_qcpox"]
-[ext_resource type="Script" uid="uid://csa57ip858sgq" path="res://scripts/rcs6.gd" id="12_bbjyt"]
+[ext_resource type="Script" uid="uid://jqt6rg36glnm" path="res://scripts/rcs/rcs2.gd" id="7_sduud"]
+[ext_resource type="Script" uid="uid://cur5jxrm7pam3" path="res://scripts/rcs/rcs3.gd" id="8_yetpw"]
+[ext_resource type="Script" uid="uid://dmcieq7lbcoyh" path="res://scripts/rcs/rcs4.gd" id="10_6exp8"]
+[ext_resource type="Script" uid="uid://bkdtil23hwk4h" path="res://scripts/rcs/rcs5.gd" id="11_qcpox"]
+[ext_resource type="Script" uid="uid://csa57ip858sgq" path="res://scripts/rcs/rcs6.gd" id="12_bbjyt"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jej6c"]
 friction = 0.44
@@ -102,6 +102,7 @@ texture_repeat = 1
 material = SubResource("CanvasItemMaterial_jej6c")
 position = Vector2(0, 46)
 rotation = 1.5708
+emitting = false
 amount = 48
 texture = ExtResource("3_umv85")
 lifetime = 0.25

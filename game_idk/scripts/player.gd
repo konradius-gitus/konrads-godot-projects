@@ -4,11 +4,13 @@ extends RigidBody2D
 @export var speed_limit = 500
 var thrust: float = 400.0
 
+
+var fuel_tank_max = 500
 var fuel_tank = 500
 
 signal player_died 
 signal tank_empty
-signal tank_changed(new_value)
+signal tank_changed(new_value: float)
 
 func _ready():
 	fuel_tank= 500
@@ -46,7 +48,7 @@ func _physics_process(delta):
 		if Input.is_action_pressed("thrust"):
 			#velocity += pointer * delta * thrust
 			apply_central_force(thrust*  Vector2.from_angle(deg_to_rad(rotation_degrees -90)))
-			fuel_tank -= 1
+			change_fuel(-1) 
 		
 		if Input.is_action_pressed("move_left"):
 			#velocity.x += -speed * delta 
@@ -74,6 +76,12 @@ func _on_body_entered(body: Node) -> void:
 	if linear_velocity.length() >= speed_limit:
 		die()
 		print("ouch")
+
+
+func change_fuel(change: float):
+	fuel_tank += change
+	tank_changed.emit(fuel_tank)
+
 
 func get_tank():
 	return(fuel_tank)
