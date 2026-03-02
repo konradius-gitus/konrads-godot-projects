@@ -3,7 +3,7 @@ extends RigidBody2D
 @export var speed = 400.0
 @export var speed_limit = 500
 @export var thrust_constant = 1000
-var thrust = 50
+var thrust = 50.0
 
 @export var fuel_tank_max = 1000
 var fuel_tank 
@@ -16,9 +16,12 @@ signal thrust_changed(new_value: float)
 var last_velocity := Vector2.ZERO
 
 
+var can_launch = true
+var rocket_scene = preload("res://scenes/rocket.tscn")
+
 func _ready():
 	fuel_tank= fuel_tank_max
-	thrust = 50
+	thrust = 50.0
 
 
 func _physics_process(delta):
@@ -33,8 +36,11 @@ func _physics_process(delta):
 	else:
 		tank_empty.emit()
 	
+	check_rocket()
+	
 	last_velocity = linear_velocity
-
+	
+	
 
 
 
@@ -85,7 +91,15 @@ func ship_thrust():
 			apply_central_force(speed*  Vector2(0, 1))
 			change_fuel(-0.2,true)
 
-
+func check_rocket():
+	var instance
+	if Input.is_action_just_pressed("rocket") and can_launch:
+		
+		$rocket_cooldown.start()
+		instance = rocket_scene.instantiate()
+		instance.global_position= global_position 
+		instance.global_rotation = global_rotation
+		get_parent().add_child(instance)
 
 func _on_body_entered(body: Node) -> void:
 	if last_velocity.length() >= speed_limit:
@@ -108,3 +122,7 @@ func change_thrust(change: float):
 func die():
 	player_died.emit()
 	Engine.time_scale = 0
+
+
+func _on_rocket_cooldown_timeout() -> void:
+	can_launch = true

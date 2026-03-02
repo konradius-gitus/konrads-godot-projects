@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://cpblrj1aeytg2"]
+
+[ext_resource type="Texture2D" uid="uid://2eh050wyfm00" path="res://sprites/rocket.png" id="1_3341w"]
+[ext_resource type="Script" uid="uid://crlaqvowdfeoj" path="res://scripts/rocket.gd" id="1_dkv7l"]
+[ext_resource type="Texture2D" uid="uid://mk56k80xr5fc" path="res://sprites/thrust_particle.png" id="3_y2y7n"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_agf72"]
+friction = 0.46
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dkv7l"]
+radius = 5.0
+height = 54.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_agf72"]
+radius = 135.13327
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m1h3n"]
+radius = 430.78632
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_g6bar"]
+particles_animation = true
+particles_anim_h_frames = 10
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_qolsk"]
+_limits = [0.0, 5.5, 0.0, 1.0]
+_data = [Vector2(0, 5.5), 0.0, 0.0, 0, 0, Vector2(0.25625, 3.6207757), -5.011261, -5.011261, 0, 0, Vector2(0.615625, 4.0234666), 0.0, 0.0, 0, 0, Vector2(0.91562504, 5.5), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_vucto"]
+curve = SubResource("Curve_qolsk")
+
+[sub_resource type="Gradient" id="Gradient_fa8w1"]
+offsets = PackedFloat32Array(0.14495799, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_oprun"]
+gradient = SubResource("Gradient_fa8w1")
+
+[sub_resource type="Curve" id="Curve_1nvrn"]
+_limits = [0.0, 5.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.63837636, 1.8993602), 1.9141614, 1.9141614, 0, 0, Vector2(0.98892987, 4.092496), 5.5784025, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_f1ej7"]
+curve = SubResource("Curve_1nvrn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hhimn"]
+lifetime_randomness = 0.06
+particle_flag_disable_z = true
+angle_min = -47.89999
+angle_max = 96.20001
+inherit_velocity_ratio = 0.79
+spread = 7.46
+initial_velocity_min = 406.41
+initial_velocity_max = 406.41
+angular_velocity_min = -197.09001
+angular_velocity_max = -24.130016
+gravity = Vector3(0, 0, 0)
+attractor_interaction_enabled = false
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_f1ej7")
+color_ramp = SubResource("GradientTexture1D_oprun")
+hue_variation_max = 0.01
+anim_speed_min = 0.17
+anim_speed_max = 0.43
+anim_speed_curve = SubResource("CurveTexture_vucto")
+
+[node name="rocket" type="RigidBody2D" unique_id=240395432]
+collision_layer = 2
+collision_mask = 14
+mass = 0.624
+physics_material_override = SubResource("PhysicsMaterial_agf72")
+gravity_scale = 0.1
+script = ExtResource("1_dkv7l")
+speed_limit = 7000.0
+speed = 1000.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=604568407]
+texture_filter = 3
+position = Vector2(-9.536743e-07, 1.1920929e-07)
+scale = Vector2(0.77, 0.77)
+texture = ExtResource("1_3341w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1625566772]
+shape = SubResource("CapsuleShape2D_dkv7l")
+
+[node name="player_check" type="Area2D" parent="." unique_id=1430246822]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_check" unique_id=115782894]
+shape = SubResource("CircleShape2D_agf72")
+
+[node name="ground_check" type="Area2D" parent="." unique_id=1547446007]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ground_check" unique_id=1387743495]
+position = Vector2(2.0408163, -459.18365)
+shape = SubResource("CircleShape2D_m1h3n")
+
+[node name="thrust_particle" type="GPUParticles2D" parent="." unique_id=443675305]
+texture_filter = 1
+texture_repeat = 1
+material = SubResource("CanvasItemMaterial_g6bar")
+position = Vector2(0, 46)
+rotation = 1.5708
+amount = 19
+texture = ExtResource("3_y2y7n")
+lifetime = 0.09
+explosiveness = 0.02
+randomness = 0.15
+fixed_fps = 60
+collision_base_size = 9.04
+trail_lifetime = 1.04
+trail_sections = 2
+trail_section_subdivisions = 1
+process_material = SubResource("ParticleProcessMaterial_hhimn")
+
+[connection signal="body_entered" from="player_check" to="." method="_on_player_check_body_entered"]
+[connection signal="body_exited" from="player_check" to="." method="_on_player_check_body_exited"]

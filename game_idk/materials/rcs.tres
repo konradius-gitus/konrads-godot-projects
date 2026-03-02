@@ -17,13 +17,13 @@ curve = SubResource("Curve_c6gdr")
 
 [resource]
 lifetime_randomness = 0.02
-particle_flag_align_y = true
 particle_flag_disable_z = true
 angle_min = -209.79999
 angle_max = 146.00002
+inherit_velocity_ratio = 0.885
 spread = 11.31
-initial_velocity_min = 190.84
-initial_velocity_max = 190.84
+initial_velocity_min = 178.87999
+initial_velocity_max = 178.87999
 angular_velocity_min = -48.270016
 angular_velocity_max = 20.109983
 gravity = Vector3(0, 98, 0)

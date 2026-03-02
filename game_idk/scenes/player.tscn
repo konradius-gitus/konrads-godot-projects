@@ -29,14 +29,14 @@ _limits = [0.0, 5.5, 0.0, 1.0]
 _data = [Vector2(0, 5.5), 0.0, 0.0, 0, 0, Vector2(0.25625, 3.6207757), -5.011261, -5.011261, 0, 0, Vector2(0.615625, 4.0234666), 0.0, 0.0, 0, 0, Vector2(0.91562504, 5.5), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_vucto"]
+[sub_resource type="CurveTexture" id="CurveTexture_jej6c"]
 curve = SubResource("Curve_4i5il")
 
 [sub_resource type="Gradient" id="Gradient_f1ej7"]
 offsets = PackedFloat32Array(0.32312927, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_oprun"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_f1ej7"]
 gradient = SubResource("Gradient_f1ej7")
 
 [sub_resource type="Curve" id="Curve_jej6c"]
@@ -44,7 +44,7 @@ _limits = [0.0, 5.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.67187506, 1.2984982), 1.9141614, 1.9141614, 0, 0, Vector2(1, 2.4374218), 5.5784025, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_f1ej7"]
+[sub_resource type="CurveTexture" id="CurveTexture_oprun"]
 curve = SubResource("Curve_jej6c")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rkguu"]
@@ -52,6 +52,7 @@ lifetime_randomness = 0.06
 particle_flag_disable_z = true
 angle_min = -47.89999
 angle_max = 96.20001
+inherit_velocity_ratio = 0.79
 spread = 7.46
 initial_velocity_min = 406.41
 initial_velocity_max = 406.41
@@ -61,12 +62,12 @@ gravity = Vector3(0, 0, 0)
 attractor_interaction_enabled = false
 scale_min = 2.5
 scale_max = 3.5
-scale_curve = SubResource("CurveTexture_f1ej7")
-color_ramp = SubResource("GradientTexture1D_oprun")
+scale_curve = SubResource("CurveTexture_oprun")
+color_ramp = SubResource("GradientTexture1D_f1ej7")
 hue_variation_max = 0.01
 anim_speed_min = 0.17
 anim_speed_max = 0.43
-anim_speed_curve = SubResource("CurveTexture_vucto")
+anim_speed_curve = SubResource("CurveTexture_jej6c")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6vx61"]
 particles_animation = true
@@ -79,6 +80,7 @@ size = Vector2(61, 88)
 
 [node name="Player" type="RigidBody2D" unique_id=1461010646]
 position = Vector2(-6.77626e-21, 5.42101e-20)
+collision_mask = 13
 physics_material_override = SubResource("PhysicsMaterial_jej6c")
 gravity_scale = 0.1
 inertia = 1.36
@@ -136,7 +138,7 @@ emitting = false
 amount = 12
 texture = ExtResource("5_x222i")
 lifetime = 0.2
-local_coords = true
+fixed_fps = 60
 process_material = ExtResource("7_jej6c")
 script = ExtResource("7_sduud")
 
@@ -192,6 +194,8 @@ script = ExtResource("12_bbjyt")
 position = Vector2(-0.5, 10)
 shape = SubResource("RectangleShape2D_mcno6")
 
+[node name="rocket_cooldown" type="Timer" parent="." unique_id=1408180589]
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="tank_empty" from="." to="particle_controller/thrust_particle" method="_on_player_tank_empty"]
 [connection signal="RCS1" from="particle_controller" to="particle_controller/rcs1" method="_on_particle_controller_rcs_1"]
@@ -206,3 +210,4 @@ shape = SubResource("RectangleShape2D_mcno6")
 [connection signal="RCS5off" from="particle_controller" to="particle_controller/rcs5" method="_on_particle_controller_rcs_5_off"]
 [connection signal="RCS6" from="particle_controller" to="particle_controller/rcs6" method="_on_particle_controller_rcs_6"]
 [connection signal="RCS6off" from="particle_controller" to="particle_controller/rcs6" method="_on_particle_controller_rcs_6_off"]
+[connection signal="timeout" from="rocket_cooldown" to="." method="_on_rocket_cooldown_timeout"]

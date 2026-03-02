@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://0ai6ntt23qmm" path="res://scripts/camera_1.gd" id="5_71j4m"]
 [ext_resource type="PackedScene" uid="uid://bbpe7h3cor8yw" path="res://scenes/pause.tscn" id="5_qfnet"]
 [ext_resource type="PackedScene" uid="uid://ie7gbjqa4fy6" path="res://scenes/death_screen.tscn" id="7_i7141"]
-[ext_resource type="Script" uid="uid://cht6tsxy2lx3d" path="res://scenes/progress_bar.gd" id="8_4mrxx"]
+[ext_resource type="Script" uid="uid://cht6tsxy2lx3d" path="res://progress_bar.gd" id="8_4mrxx"]
 [ext_resource type="Script" uid="uid://b5yqw310mdtwk" path="res://scripts/thrust_gauge.gd" id="9_7r4gi"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qfnet"]
@@ -58,6 +58,8 @@ speed_limit = 521
 fuel_tank_max = 2000
 
 [node name="terrain" type="StaticBody2D" parent="." unique_id=297748094]
+collision_layer = 8
+collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_qfnet")
 script = ExtResource("2_3tygp")
 
