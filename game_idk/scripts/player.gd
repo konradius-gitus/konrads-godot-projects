@@ -93,8 +93,8 @@ func ship_thrust():
 
 func check_rocket():
 	var instance
-	if Input.is_action_just_pressed("rocket") and can_launch:
-		
+	if Input.is_action_pressed("rocket") and can_launch:
+		can_launch = false
 		$rocket_cooldown.start()
 		instance = rocket_scene.instantiate()
 		instance.global_position= global_position 

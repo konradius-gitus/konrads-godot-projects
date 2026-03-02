@@ -70,9 +70,11 @@ anim_speed_curve = SubResource("CurveTexture_vucto")
 [node name="rocket" type="RigidBody2D" unique_id=240395432]
 collision_layer = 2
 collision_mask = 14
-mass = 0.624
+mass = 0.346
 physics_material_override = SubResource("PhysicsMaterial_agf72")
 gravity_scale = 0.1
+contact_monitor = true
+max_contacts_reported = 10
 script = ExtResource("1_dkv7l")
 speed_limit = 7000.0
 speed = 1000.0
@@ -116,5 +118,10 @@ trail_sections = 2
 trail_section_subdivisions = 1
 process_material = SubResource("ParticleProcessMaterial_hhimn")
 
+[node name="life_timer" type="Timer" parent="." unique_id=824331393]
+wait_time = 15.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="player_check" to="." method="_on_player_check_body_entered"]
 [connection signal="body_exited" from="player_check" to="." method="_on_player_check_body_exited"]
+[connection signal="timeout" from="life_timer" to="." method="_on_life_timer_timeout"]

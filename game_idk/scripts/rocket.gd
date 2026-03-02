@@ -1,11 +1,12 @@
 extends RigidBody2D
 
 var state 
-@export var speed_limit = 5000.00
+@export var speed_limit = 8000.00
 @export var speed= 500.00
 
 var pointer: Vector2
 
+var last_velocity := Vector2.ZERO
 
 enum AVOID{ground,player,projectiles}
 enum STATE{
@@ -17,9 +18,11 @@ enum STATE{
 	AVOID
 }
 
+signal rocket_explosion(Vector2)
 
 func _ready() -> void:
 	state= STATE.EJECT
+	$life_timer.start()
 
 
 func _physics_process(delta: float) -> void:
@@ -45,6 +48,7 @@ func _physics_process(delta: float) -> void:
 			follow()
 	
 	check_collision()
+	last_velocity = linear_velocity
 
 func follow():
 	pass
@@ -65,6 +69,9 @@ func eject():
 		avoid(AVOID.ground)
 
 
+func check_collision():
+	pass
+
 func avoid(what: int):
 	match what:
 		AVOID.player:
@@ -75,9 +82,18 @@ func avoid(what: int):
 			pass
 
 
-func _on_player_check_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.
 
 
-func _on_player_check_body_exited(body: Node2D) -> void:
-	state = STATE.IDLE
+func _on_body_entered(body: Node) -> void:
+	if last_velocity.length()>= 50:
+		explode()
+
+
+func explode():
+	rocket_explosion.emit(global_position)
+	$life_timer.stop()
+	print("boom!")
+	queue_free()
+
+func _on_life_timer_timeout() -> void:
+	explode()
