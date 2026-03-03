@@ -195,6 +195,7 @@ position = Vector2(-0.5, 10)
 shape = SubResource("RectangleShape2D_mcno6")
 
 [node name="rocket_cooldown" type="Timer" parent="." unique_id=1408180589]
+wait_time = 0.143
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="tank_empty" from="." to="particle_controller/thrust_particle" method="_on_player_tank_empty"]

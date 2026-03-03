@@ -4,10 +4,15 @@ extends Node2D
 @onready var death_screen = $CanvasLayer/Death_Screen
 @onready var player = $Player
 
+
+
+var rocket_scene = preload("res://scenes/rocket.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Engine.time_scale = 1
 	player.connect("player_died", die)
+	player.connect("rocket_spawn", spawn_rocket)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,3 +23,10 @@ func _process(delta: float) -> void:
 
 func die():
 	death_screen.show()
+
+func spawn_rocket(coords: Vector2, angle: float):
+	var instance
+	instance = rocket_scene.instantiate()
+	instance.global_position= coords
+	instance.global_rotation = angle
+	add_child(instance)

@@ -7,6 +7,7 @@ var state
 var pointer: Vector2
 
 var last_velocity := Vector2.ZERO
+@onready var explosion = preload("res://scenes/explosion.tscn")
 
 enum AVOID{ground,player,projectiles}
 enum STATE{
@@ -91,8 +92,10 @@ func _on_body_entered(body: Node) -> void:
 
 func explode():
 	rocket_explosion.emit(global_position)
-	$life_timer.stop()
-	print("boom!")
+	var instance
+	instance = explosion.instantiate()
+	instance.global_position= global_position
+	get_parent().add_child(instance)
 	queue_free()
 
 func _on_life_timer_timeout() -> void:

@@ -12,6 +12,8 @@ signal player_died
 signal tank_empty
 signal tank_changed(new_value: float)
 signal thrust_changed(new_value: float)
+signal rocket_spawn(coords: Vector2, angle: float)
+
 
 var last_velocity := Vector2.ZERO
 
@@ -95,11 +97,8 @@ func check_rocket():
 	var instance
 	if Input.is_action_pressed("rocket") and can_launch:
 		can_launch = false
+		rocket_spawn.emit(global_position,rotation)
 		$rocket_cooldown.start()
-		instance = rocket_scene.instantiate()
-		instance.global_position= global_position 
-		instance.global_rotation = global_rotation
-		get_parent().add_child(instance)
 
 func _on_body_entered(body: Node) -> void:
 	if last_velocity.length() >= speed_limit:
