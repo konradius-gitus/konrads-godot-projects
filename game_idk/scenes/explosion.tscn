@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ic0gcrhhw8dy"]
 
 [ext_resource type="Texture2D" uid="uid://mk56k80xr5fc" path="res://sprites/thrust_particle.png" id="1_17npe"]
-[ext_resource type="Script" uid="uid://druacj2a1c5t" path="res://scripts/explosion.gd" id="1_nfeox"]
+[ext_resource type="Script" uid="uid://druacj2a1c5t" path="res://scripts/effects/explosion.gd" id="1_nfeox"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nfeox"]
 particles_animation = true

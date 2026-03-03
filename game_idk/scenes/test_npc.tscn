@@ -1,18 +1,10 @@
-[gd_scene format=3 uid="uid://do20vv0rhjjnf"]
+[gd_scene format=3 uid="uid://c6d3juvykcxfl"]
 
-[ext_resource type="Script" uid="uid://cf1ulg3ime6vw" path="res://scripts/player/player.gd" id="1_uaxgb"]
-[ext_resource type="Texture2D" uid="uid://ch3tu6atbdr1n" path="res://sprites/lander_1.png" id="2_ybou7"]
-[ext_resource type="Script" uid="uid://djgsx3uii5x0n" path="res://scripts/player/particle_controller.gd" id="3_jt41n"]
-[ext_resource type="Texture2D" uid="uid://mk56k80xr5fc" path="res://sprites/thrust_particle.png" id="3_umv85"]
-[ext_resource type="Script" uid="uid://csflsjq2bit3f" path="res://scripts/player/thrust_particle.gd" id="4_24335"]
-[ext_resource type="Texture2D" uid="uid://cci738880qakw" path="res://sprites/RCV_particle.png" id="5_x222i"]
-[ext_resource type="Script" uid="uid://b5ibbvl0n4box" path="res://scripts/player/rcs/rcs1.gd" id="7_0rccx"]
-[ext_resource type="Material" uid="uid://ckptdalejtl4d" path="res://materials/rcs.tres" id="7_jej6c"]
-[ext_resource type="Script" uid="uid://jqt6rg36glnm" path="res://scripts/player/rcs/rcs2.gd" id="7_sduud"]
-[ext_resource type="Script" uid="uid://cur5jxrm7pam3" path="res://scripts/player/rcs/rcs3.gd" id="8_yetpw"]
-[ext_resource type="Script" uid="uid://dmcieq7lbcoyh" path="res://scripts/player/rcs/rcs4.gd" id="10_6exp8"]
-[ext_resource type="Script" uid="uid://bkdtil23hwk4h" path="res://scripts/player/rcs/rcs5.gd" id="11_qcpox"]
-[ext_resource type="Script" uid="uid://csa57ip858sgq" path="res://scripts/player/rcs/rcs6.gd" id="12_bbjyt"]
+[ext_resource type="Script" uid="uid://bgltg1hyi3ei4" path="res://scripts/NPCs/test_npc.gd" id="1_klext"]
+[ext_resource type="Texture2D" uid="uid://ch3tu6atbdr1n" path="res://sprites/lander_1.png" id="2_aebiu"]
+[ext_resource type="Texture2D" uid="uid://mk56k80xr5fc" path="res://sprites/thrust_particle.png" id="4_12p43"]
+[ext_resource type="Texture2D" uid="uid://cci738880qakw" path="res://sprites/RCV_particle.png" id="6_w1to7"]
+[ext_resource type="Material" uid="uid://ckptdalejtl4d" path="res://materials/rcs.tres" id="7_bxb77"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jej6c"]
 friction = 0.44
@@ -78,26 +70,21 @@ particles_anim_loop = false
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mcno6"]
 size = Vector2(61, 88)
 
-[node name="Player" type="RigidBody2D" unique_id=1461010646]
-z_index = 2
-position = Vector2(-6.77626e-21, 5.42101e-20)
+[node name="test_npc" type="RigidBody2D" unique_id=1461010646]
+z_index = 1
 collision_mask = 13
 physics_material_override = SubResource("PhysicsMaterial_jej6c")
-gravity_scale = 0.1
-inertia = 1.36
+gravity_scale = 0.12
 contact_monitor = true
 max_contacts_reported = 10
-script = ExtResource("1_uaxgb")
-speed = 200.0
-speed_limit = 197
+script = ExtResource("1_klext")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=799995008]
 texture_filter = 1
 position = Vector2(2, -41)
-texture = ExtResource("2_ybou7")
+texture = ExtResource("2_aebiu")
 
 [node name="particle_controller" type="Node2D" parent="." unique_id=911741720]
-script = ExtResource("3_jt41n")
 
 [node name="thrust_particle" type="GPUParticles2D" parent="particle_controller" unique_id=92246468]
 texture_filter = 1
@@ -107,7 +94,7 @@ position = Vector2(0, 46)
 rotation = 1.5708
 emitting = false
 amount = 48
-texture = ExtResource("3_umv85")
+texture = ExtResource("4_12p43")
 lifetime = 0.25
 explosiveness = 0.02
 randomness = 0.15
@@ -117,7 +104,6 @@ trail_lifetime = 1.04
 trail_sections = 2
 trail_section_subdivisions = 1
 process_material = SubResource("ParticleProcessMaterial_rkguu")
-script = ExtResource("4_24335")
 
 [node name="rcs1" type="GPUParticles2D" parent="particle_controller" unique_id=1311182676]
 texture_filter = 1
@@ -126,10 +112,9 @@ position = Vector2(31, -20)
 rotation = -1.5708
 emitting = false
 amount = 12
-texture = ExtResource("5_x222i")
+texture = ExtResource("6_w1to7")
 lifetime = 0.13
-process_material = ExtResource("7_jej6c")
-script = ExtResource("7_0rccx")
+process_material = ExtResource("7_bxb77")
 
 [node name="rcs2" type="GPUParticles2D" parent="particle_controller" unique_id=363454078]
 texture_filter = 1
@@ -137,11 +122,10 @@ material = SubResource("CanvasItemMaterial_6vx61")
 position = Vector2(39, -8)
 emitting = false
 amount = 12
-texture = ExtResource("5_x222i")
+texture = ExtResource("6_w1to7")
 lifetime = 0.2
 fixed_fps = 60
-process_material = ExtResource("7_jej6c")
-script = ExtResource("7_sduud")
+process_material = ExtResource("7_bxb77")
 
 [node name="rcs3" type="GPUParticles2D" parent="particle_controller" unique_id=1420706040]
 texture_filter = 1
@@ -150,10 +134,9 @@ position = Vector2(31, 4)
 rotation = 1.5708
 emitting = false
 amount = 12
-texture = ExtResource("5_x222i")
+texture = ExtResource("6_w1to7")
 lifetime = 0.2
-process_material = ExtResource("7_jej6c")
-script = ExtResource("8_yetpw")
+process_material = ExtResource("7_bxb77")
 
 [node name="rcs4" type="GPUParticles2D" parent="particle_controller" unique_id=355245792]
 texture_filter = 1
@@ -162,10 +145,9 @@ position = Vector2(-34, 5)
 rotation = 1.5708
 emitting = false
 amount = 12
-texture = ExtResource("5_x222i")
+texture = ExtResource("6_w1to7")
 lifetime = 0.2
-process_material = ExtResource("7_jej6c")
-script = ExtResource("10_6exp8")
+process_material = ExtResource("7_bxb77")
 
 [node name="rcs5" type="GPUParticles2D" parent="particle_controller" unique_id=1157977824]
 texture_filter = 1
@@ -174,10 +156,9 @@ position = Vector2(-44, -9)
 rotation = 3.14159
 emitting = false
 amount = 12
-texture = ExtResource("5_x222i")
+texture = ExtResource("6_w1to7")
 lifetime = 0.2
-process_material = ExtResource("7_jej6c")
-script = ExtResource("11_qcpox")
+process_material = ExtResource("7_bxb77")
 
 [node name="rcs6" type="GPUParticles2D" parent="particle_controller" unique_id=1637043945]
 texture_filter = 1
@@ -186,10 +167,9 @@ position = Vector2(-34, -22)
 rotation = -1.5708
 emitting = false
 amount = 12
-texture = ExtResource("5_x222i")
+texture = ExtResource("6_w1to7")
 lifetime = 0.2
-process_material = ExtResource("7_jej6c")
-script = ExtResource("12_bbjyt")
+process_material = ExtResource("7_bxb77")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=681511849]
 position = Vector2(-0.5, 10)
@@ -198,18 +178,4 @@ shape = SubResource("RectangleShape2D_mcno6")
 [node name="rocket_cooldown" type="Timer" parent="." unique_id=1408180589]
 wait_time = 0.143
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="tank_empty" from="." to="particle_controller/thrust_particle" method="_on_player_tank_empty"]
-[connection signal="RCS1" from="particle_controller" to="particle_controller/rcs1" method="_on_particle_controller_rcs_1"]
-[connection signal="RCS1off" from="particle_controller" to="particle_controller/rcs1" method="_on_particle_controller_rcs_1_off"]
-[connection signal="RCS2" from="particle_controller" to="particle_controller/rcs2" method="_on_particle_controller_rcs_2"]
-[connection signal="RCS2off" from="particle_controller" to="particle_controller/rcs2" method="_on_particle_controller_rcs_2_off"]
-[connection signal="RCS3" from="particle_controller" to="particle_controller/rcs3" method="_on_particle_controller_rcs_3"]
-[connection signal="RCS3off" from="particle_controller" to="particle_controller/rcs3" method="_on_particle_controller_rcs_3_off"]
-[connection signal="RCS4" from="particle_controller" to="particle_controller/rcs4" method="_on_particle_controller_rcs_4"]
-[connection signal="RCS4off" from="particle_controller" to="particle_controller/rcs4" method="_on_particle_controller_rcs_4_off"]
-[connection signal="RCS5" from="particle_controller" to="particle_controller/rcs5" method="_on_particle_controller_rcs_5"]
-[connection signal="RCS5off" from="particle_controller" to="particle_controller/rcs5" method="_on_particle_controller_rcs_5_off"]
-[connection signal="RCS6" from="particle_controller" to="particle_controller/rcs6" method="_on_particle_controller_rcs_6"]
-[connection signal="RCS6off" from="particle_controller" to="particle_controller/rcs6" method="_on_particle_controller_rcs_6_off"]
 [connection signal="timeout" from="rocket_cooldown" to="." method="_on_rocket_cooldown_timeout"]

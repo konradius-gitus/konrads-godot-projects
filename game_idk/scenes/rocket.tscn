@@ -9,7 +9,7 @@ friction = 0.46
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dkv7l"]
 radius = 5.0
-height = 54.0
+height = 32.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_agf72"]
 radius = 135.13327
@@ -80,9 +80,10 @@ speed_limit = 7000.0
 speed = 1000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=604568407]
+z_index = 1
 texture_filter = 3
-position = Vector2(-9.536743e-07, 1.1920929e-07)
-scale = Vector2(0.77, 0.77)
+position = Vector2(5.9604645e-08, -1.1368684e-13)
+scale = Vector2(0.455, 0.455)
 texture = ExtResource("1_3341w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1625566772]
@@ -104,7 +105,7 @@ shape = SubResource("CircleShape2D_m1h3n")
 texture_filter = 1
 texture_repeat = 1
 material = SubResource("CanvasItemMaterial_g6bar")
-position = Vector2(0, 46)
+position = Vector2(0, 18)
 rotation = 1.5708
 amount = 19
 texture = ExtResource("3_y2y7n")
