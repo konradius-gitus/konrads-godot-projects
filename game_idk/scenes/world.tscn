@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://ie7gbjqa4fy6" path="res://scenes/death_screen.tscn" id="7_i7141"]
 [ext_resource type="Script" uid="uid://cht6tsxy2lx3d" path="res://progress_bar.gd" id="8_4mrxx"]
 [ext_resource type="Script" uid="uid://b5yqw310mdtwk" path="res://scripts/player/thrust_gauge.gd" id="9_7r4gi"]
+[ext_resource type="PackedScene" uid="uid://c6d3juvykcxfl" path="res://scenes/test_npc.tscn" id="10_w7kh3"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qfnet"]
 friction = 0.7
@@ -35,6 +36,51 @@ colors = PackedColorArray(0, 0, 0, 0, 0.41960785, 0.043137256, 0.0627451, 0.8117
 gradient = SubResource("Gradient_7r4gi")
 fill = 1
 fill_from = Vector2(0.5017361, 0.5017361)
+
+[sub_resource type="Gradient" id="Gradient_w7kh3"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_e3hyu"]
+gradient = SubResource("Gradient_w7kh3")
+
+[sub_resource type="Curve" id="Curve_q5onr"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_jhx03"]
+curve = SubResource("Curve_q5onr")
+
+[sub_resource type="Curve" id="Curve_o8fc1"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0.06273063, 2.069808), 0.0, 0.0, 0, 0, Vector2(0.9594096, 3), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xo05s"]
+curve = SubResource("Curve_o8fc1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dss4m"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 131.87
+emission_ring_radius = 31.2
+emission_ring_inner_radius = 23.49
+emission_ring_cone_angle = 90.0
+angle_min = -117.69999
+angle_max = 90.60001
+angular_velocity_min = -226.42001
+angular_velocity_max = 203.76997
+orbit_velocity_min = 0.91900015
+orbit_velocity_max = 1.1330001
+radial_velocity_min = -12.580022
+radial_velocity_max = -2.2351742e-05
+gravity = Vector3(0, 0, 0)
+scale_over_velocity_curve = SubResource("CurveTexture_xo05s")
+color = Color(0.17819999, 0.54, 0.19628997, 0.8784314)
+color_ramp = SubResource("GradientTexture1D_e3hyu")
+hue_variation_curve = SubResource("CurveTexture_jhx03")
+turbulence_noise_strength = 12.99
 
 [node name="World" type="Node2D" unique_id=1723786056]
 light_mask = 2
@@ -143,5 +189,38 @@ size_flags_vertical = 1
 theme_override_font_sizes/font_size = 36
 text = "Thrust:"
 
+[node name="test_npc" parent="." unique_id=1461010646 instance=ExtResource("10_w7kh3")]
+position = Vector2(1889, -2430)
+
+[node name="test_npc2" parent="." unique_id=304717852 instance=ExtResource("10_w7kh3")]
+position = Vector2(2092, -2779)
+
+[node name="test_npc3" parent="." unique_id=1580470461 instance=ExtResource("10_w7kh3")]
+position = Vector2(1390, -3310)
+
+[node name="test_npc4" parent="." unique_id=116420348 instance=ExtResource("10_w7kh3")]
+position = Vector2(-1447, -2987)
+
+[node name="test_npc5" parent="." unique_id=674136634 instance=ExtResource("10_w7kh3")]
+position = Vector2(-824, -3432)
+
+[node name="test_npc6" parent="." unique_id=1155207592 instance=ExtResource("10_w7kh3")]
+position = Vector2(-616, -2779)
+
+[node name="rocket_aim" type="Marker2D" parent="." unique_id=1668576455]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="rocket_aim" unique_id=1183424399]
+amount = 75
+lifetime = 0.060000000000000005
+explosiveness = 0.69
+randomness = 0.13
+visibility_rect = Rect2(-100, -100, 200.38, 200)
+process_material = SubResource("ParticleProcessMaterial_dss4m")
+
+[node name="aim_timer" type="Timer" parent="." unique_id=1518379010]
+wait_time = 4.255
+ignore_time_scale = true
+
 [connection signal="tank_changed" from="Player" to="CanvasLayer/ProgressBar" method="_on_player_tank_changed"]
 [connection signal="thrust_changed" from="Player" to="CanvasLayer/thrust_gauge" method="_on_player_thrust_changed"]
+[connection signal="timeout" from="aim_timer" to="." method="_on_aim_timer_timeout"]

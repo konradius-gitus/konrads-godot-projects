@@ -10,5 +10,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func idle():
-	
+func alert():
+	pass
+
+
+func _on_aggro_range_body_entered(body: Node2D) -> void:
+	state = STATE.ALERT

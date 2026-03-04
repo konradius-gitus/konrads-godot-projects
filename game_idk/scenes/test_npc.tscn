@@ -70,9 +70,14 @@ particles_anim_loop = false
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mcno6"]
 size = Vector2(61, 88)
 
-[node name="test_npc" type="RigidBody2D" unique_id=1461010646]
+[sub_resource type="CircleShape2D" id="CircleShape2D_01yqc"]
+radius = 2797.917
+
+[node name="test_npc" type="RigidBody2D" unique_id=1461010646 groups=["damagable"]]
 z_index = 1
-collision_mask = 13
+texture_filter = 1
+collision_layer = 16
+collision_mask = 9
 physics_material_override = SubResource("PhysicsMaterial_jej6c")
 gravity_scale = 0.12
 contact_monitor = true
@@ -80,6 +85,8 @@ max_contacts_reported = 10
 script = ExtResource("1_klext")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=799995008]
+self_modulate = Color(0.61, 0.35674834, 0.3233, 1)
+z_index = 1
 texture_filter = 1
 position = Vector2(2, -41)
 texture = ExtResource("2_aebiu")
@@ -178,4 +185,12 @@ shape = SubResource("RectangleShape2D_mcno6")
 [node name="rocket_cooldown" type="Timer" parent="." unique_id=1408180589]
 wait_time = 0.143
 
+[node name="aggro_range" type="Area2D" parent="." unique_id=1552190057]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="aggro_range" unique_id=1040569807]
+visible = false
+shape = SubResource("CircleShape2D_01yqc")
+
 [connection signal="timeout" from="rocket_cooldown" to="." method="_on_rocket_cooldown_timeout"]
+[connection signal="body_entered" from="aggro_range" to="." method="_on_aggro_range_body_entered"]

@@ -78,7 +78,10 @@ particles_anim_loop = false
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mcno6"]
 size = Vector2(61, 88)
 
-[node name="Player" type="RigidBody2D" unique_id=1461010646]
+[sub_resource type="CircleShape2D" id="CircleShape2D_jej6c"]
+radius = 94.08507
+
+[node name="Player" type="RigidBody2D" unique_id=1461010646 groups=["damagable"]]
 z_index = 2
 position = Vector2(-6.77626e-21, 5.42101e-20)
 collision_mask = 13
@@ -198,6 +201,13 @@ shape = SubResource("RectangleShape2D_mcno6")
 [node name="rocket_cooldown" type="Timer" parent="." unique_id=1408180589]
 wait_time = 0.143
 
+[node name="rocket_collect" type="Area2D" parent="." unique_id=1750365585]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="rocket_collect" unique_id=2129694160]
+shape = SubResource("CircleShape2D_jej6c")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="tank_empty" from="." to="particle_controller/thrust_particle" method="_on_player_tank_empty"]
 [connection signal="RCS1" from="particle_controller" to="particle_controller/rcs1" method="_on_particle_controller_rcs_1"]
@@ -213,3 +223,4 @@ wait_time = 0.143
 [connection signal="RCS6" from="particle_controller" to="particle_controller/rcs6" method="_on_particle_controller_rcs_6"]
 [connection signal="RCS6off" from="particle_controller" to="particle_controller/rcs6" method="_on_particle_controller_rcs_6_off"]
 [connection signal="timeout" from="rocket_cooldown" to="." method="_on_rocket_cooldown_timeout"]
+[connection signal="body_exited" from="rocket_collect" to="." method="_on_rocket_collect_body_exited"]

@@ -2,6 +2,8 @@ extends RigidBody2D
 
 class_name npc_ship
 
+var explosion = preload("res://scenes/explosion.tscn")
+
 var hp = 100
 var shield_charge = 1
 var shield_strength = 100
@@ -9,7 +11,7 @@ var shield_force
 
 var weapon_cooldown = 1
 var weapon
-var damage = 30
+var weapon_damage = 30
 
 
 var state = 0
@@ -20,7 +22,8 @@ enum STATE{
 	ENGAGING,
 	FLEE,
 	APPROACH,
-	RECOVER
+	RECOVER,
+	ATTACK
 }
 
 
@@ -31,6 +34,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
+	
+	
 	match state:
 		
 		STATE.IDLE:
@@ -50,6 +56,11 @@ func _process(delta: float) -> void:
 		
 		STATE.RECOVER:
 			recover()
+		
+		STATE.ATTACK:
+			attack()
+
+
 
 func idle():
 	pass
@@ -69,4 +80,17 @@ func approach():
 func recover():
 	pass
 
-func 
+func attack():
+	pass
+
+func take_damage(dmg: int):
+	hp -= dmg
+	if hp <= 0:
+		die()
+
+func die():
+	var instance = explosion.instantiate()
+	instance.global_position = global_position
+	get_parent().add_child(instance)
+	queue_free()
+	

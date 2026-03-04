@@ -15,6 +15,8 @@ signal thrust_changed(new_value: float)
 signal rocket_spawn(coords: Vector2, angle: float)
 
 
+var hp_max = 100
+var hp
 var last_velocity := Vector2.ZERO
 
 
@@ -24,6 +26,7 @@ var rocket_scene = preload("res://scenes/rocket.tscn")
 func _ready():
 	fuel_tank= fuel_tank_max
 	thrust = 50.0
+	hp = hp_max
 
 
 func _physics_process(delta):
@@ -94,10 +97,14 @@ func ship_thrust():
 			change_fuel(-0.2,true)
 
 func check_rocket():
-	var instance
+	var instance = rocket_scene.instantiate()
 	if Input.is_action_pressed("rocket") and can_launch:
 		can_launch = false
-		rocket_spawn.emit(global_position,rotation)
+		#rocket_spawn.emit(global_position,rotation)
+		instance.global_position = global_position
+		instance.global_rotation = global_rotation
+		instance.linear_velocity = last_velocity
+		get_parent().add_child(instance)
 		$rocket_cooldown.start()
 
 func _on_body_entered(body: Node) -> void:
@@ -122,6 +129,14 @@ func die():
 	player_died.emit()
 	Engine.time_scale = 0
 
+func take_damage(dmg: int):
+	hp -= dmg
+	if hp <= 0:
+		die()
 
 func _on_rocket_cooldown_timeout() -> void:
 	can_launch = true
+
+
+func _on_rocket_collect_body_exited(body: Node2D) -> void:
+	pass # Replace with function body.

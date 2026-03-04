@@ -12,10 +12,10 @@ radius = 5.0
 height = 32.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_agf72"]
-radius = 135.13327
+radius = 26.305893
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m1h3n"]
-radius = 430.78632
+radius = 236.13979
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_g6bar"]
 particles_animation = true
@@ -59,7 +59,8 @@ angular_velocity_min = -197.09001
 angular_velocity_max = -24.130016
 gravity = Vector3(0, 0, 0)
 attractor_interaction_enabled = false
-scale_max = 1.5
+scale_min = 0.29999998
+scale_max = 0.9
 scale_curve = SubResource("CurveTexture_f1ej7")
 color_ramp = SubResource("GradientTexture1D_oprun")
 hue_variation_max = 0.01
@@ -67,9 +68,10 @@ anim_speed_min = 0.17
 anim_speed_max = 0.43
 anim_speed_curve = SubResource("CurveTexture_vucto")
 
-[node name="rocket" type="RigidBody2D" unique_id=240395432]
+[node name="rocket" type="RigidBody2D" unique_id=240395432 groups=["player_rocket"]]
+rotation = 1.5707964
 collision_layer = 2
-collision_mask = 14
+collision_mask = 30
 mass = 0.346
 physics_material_override = SubResource("PhysicsMaterial_agf72")
 gravity_scale = 0.1
@@ -95,10 +97,11 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_check" unique_id=115782894]
 shape = SubResource("CircleShape2D_agf72")
 
-[node name="ground_check" type="Area2D" parent="." unique_id=1547446007]
+[node name="target_check" type="Area2D" parent="." unique_id=1547446007]
+collision_layer = 0
+collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ground_check" unique_id=1387743495]
-position = Vector2(2.0408163, -459.18365)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="target_check" unique_id=1387743495]
 shape = SubResource("CircleShape2D_m1h3n")
 
 [node name="thrust_particle" type="GPUParticles2D" parent="." unique_id=443675305]
@@ -122,7 +125,10 @@ process_material = SubResource("ParticleProcessMaterial_hhimn")
 [node name="life_timer" type="Timer" parent="." unique_id=824331393]
 wait_time = 15.0
 
+[node name="eject_timer" type="Timer" parent="." unique_id=72151199]
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="body_entered" from="player_check" to="." method="_on_player_check_body_entered"]
 [connection signal="body_exited" from="player_check" to="." method="_on_player_check_body_exited"]
+[connection signal="body_entered" from="target_check" to="." method="_on_target_check_body_entered"]
 [connection signal="timeout" from="life_timer" to="." method="_on_life_timer_timeout"]
+[connection signal="timeout" from="eject_timer" to="." method="_on_eject_timer_timeout"]
