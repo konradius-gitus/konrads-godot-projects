@@ -211,7 +211,7 @@ position = Vector2(-616, -2779)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="rocket_aim" unique_id=1183424399]
 amount = 75
-lifetime = 0.060000000000000005
+lifetime = 0.06
 explosiveness = 0.69
 randomness = 0.13
 visibility_rect = Rect2(-100, -100, 200.38, 200)
