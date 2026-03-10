@@ -95,9 +95,15 @@ collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1870794062]
 shape = SubResource("CircleShape2D_3oo6d")
+debug_color = Color(0.9004316, 0.31094489, 3.85046e-07, 0.41960785)
 
 [node name="Timer" type="Timer" parent="." unique_id=1130426646]
-wait_time = 3.98
+wait_time = 4.0
+autostart = true
+
+[node name="Collisiopn_Timer" type="Timer" parent="." unique_id=2069562989]
+wait_time = 0.327
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Collisiopn_Timer" to="." method="_on_collisiopn_timer_timeout"]

@@ -96,13 +96,16 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_check" unique_id=115782894]
 shape = SubResource("CircleShape2D_agf72")
+debug_color = Color(0.31972316, 0.5753962, 0.69584125, 0.5803922)
 
 [node name="target_check" type="Area2D" parent="." unique_id=1547446007]
+modulate = Color(1, 0.94, 0.94, 1)
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="target_check" unique_id=1387743495]
 shape = SubResource("CircleShape2D_m1h3n")
+debug_color = Color(0.20511553, 0.63143736, 0.32217935, 0.41960785)
 
 [node name="thrust_particle" type="GPUParticles2D" parent="." unique_id=443675305]
 texture_filter = 1

@@ -15,9 +15,15 @@ func _process(delta: float) -> void:
 
 
 func _on_timer_timeout() -> void:
+	
 	queue_free()
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("damagable"):
 		body.take_damage(40)
+
+
+func _on_collisiopn_timer_timeout() -> void:
+	$Area2D.monitorable = false
+	$Area2D.monitoring = false

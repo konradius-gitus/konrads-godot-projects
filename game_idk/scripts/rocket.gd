@@ -28,6 +28,7 @@ func _ready() -> void:
 	state= STATE.EJECT
 	$life_timer.start()
 	#apply_central_impulse(500)
+	apply_central_impulse(Vector2.UP.rotated(rotation)*1000)
 
 
 func _physics_process(delta: float) -> void:
@@ -71,7 +72,7 @@ func seek(delta: float):
 	var goal = get_node("/root/World/rocket_aim").global_position
 	var direction = (goal - global_position).normalized()
 	var goal_vector: Vector2 = (direction*linear_velocity.length())-direction
-	rotate_ship(rad_to_deg(goal_vector.angle()))
+	rotate_rocket(rad_to_deg(goal_vector.angle()))
 
 func idle():
 	if Input.is_action_just_pressed("aim_lock"):
@@ -101,26 +102,24 @@ func _on_body_entered(body: Node) -> void:
 		explode()
 
 func explode():
-	rocket_explosion.emit(global_position)
+	#rocket_explosion.emit(global_position)
 	var instance
 	instance = explosion.instantiate()
 	instance.global_position= global_position
 	get_parent().add_child(instance)
-	call_deferred("queue_free()")
+	queue_free()
 
 func _on_life_timer_timeout() -> void:
 	explode()
 
 
 
-func rotate_ship(goal_angle: float):
+func rotate_rocket(goal_angle: float):
 	var goal_vector = Vector2.from_angle(goal_angle)
 	if abs(rad_to_deg(get_angle_to(goal_vector))) < 1:
 		if  angular_velocity < 1:
 			return
-	
-	
-	
+
 
 func break_rapidly():
 	pass
@@ -161,4 +160,5 @@ func _on_player_check_body_exited(body: Node2D) -> void:
 	far_enough = true
 
 func _on_target_check_body_entered(body: Node2D) -> void:
-	state = STATE.PRIMED
+	#state = STATE.PRIMED
+	pass

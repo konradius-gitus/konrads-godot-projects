@@ -39,3 +39,6 @@ func rocket_aim_lock():
 
 func _on_aim_timer_timeout() -> void:
 	$rocket_aim.hide()
+
+func get_player_position():
+	return player.global_position

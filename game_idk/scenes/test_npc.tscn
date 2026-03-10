@@ -83,6 +83,8 @@ gravity_scale = 0.12
 contact_monitor = true
 max_contacts_reported = 10
 script = ExtResource("1_klext")
+thrust_max = null
+thrust_min = null
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=799995008]
 self_modulate = Color(0.61, 0.35674834, 0.3233, 1)

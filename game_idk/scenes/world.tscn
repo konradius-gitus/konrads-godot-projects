@@ -191,21 +191,8 @@ text = "Thrust:"
 
 [node name="test_npc" parent="." unique_id=1461010646 instance=ExtResource("10_w7kh3")]
 position = Vector2(1889, -2430)
-
-[node name="test_npc2" parent="." unique_id=304717852 instance=ExtResource("10_w7kh3")]
-position = Vector2(2092, -2779)
-
-[node name="test_npc3" parent="." unique_id=1580470461 instance=ExtResource("10_w7kh3")]
-position = Vector2(1390, -3310)
-
-[node name="test_npc4" parent="." unique_id=116420348 instance=ExtResource("10_w7kh3")]
-position = Vector2(-1447, -2987)
-
-[node name="test_npc5" parent="." unique_id=674136634 instance=ExtResource("10_w7kh3")]
-position = Vector2(-824, -3432)
-
-[node name="test_npc6" parent="." unique_id=1155207592 instance=ExtResource("10_w7kh3")]
-position = Vector2(-616, -2779)
+thrust_max = 600
+thrust_min = 1
 
 [node name="rocket_aim" type="Marker2D" parent="." unique_id=1668576455]
 
